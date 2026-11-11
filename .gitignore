@@ -1,0 +1,13 @@
+# Session / login data 
+x_session.json
+x_profile/
+
+# Scraped data
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
