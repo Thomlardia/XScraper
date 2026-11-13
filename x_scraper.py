@@ -1,7 +1,9 @@
+# scrapes comments from X
+
 import csv
 from playwright.sync_api import sync_playwright
 
-MAX_SCROLLS = 50        # How many times the script will scroll down
+MAX_SCROLLS = 10        # How many times the script will scroll down
 IDLE_LIMIT = 5          # stop after this many scrolls with nothing new
 
 with sync_playwright() as p: # starts playwright and assigns it to the variable p
@@ -43,7 +45,7 @@ with sync_playwright() as p: # starts playwright and assigns it to the variable 
         page.wait_for_timeout(1500)
 
     # save data to csv
-    with open("comments.csv", "w", newline="", encoding="utf-8-sig") as f:
+    with open("x_comments.csv", "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
         writer.writerow(["user", "datetime", "text", "link"])
         writer.writerows(comments.values())
