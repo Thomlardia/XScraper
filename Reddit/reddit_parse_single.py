@@ -1,3 +1,5 @@
+# parse single reddit html page and get comments
+
 import csv
 import sys
 from bs4 import BeautifulSoup
