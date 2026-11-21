@@ -38,3 +38,5 @@ If `python3 -m venv` fails, run `sudo apt install python3-venv` first.
 
 ### [X](X/x_scraper.md)
 ### [Reddit](Reddit/reddit_parser.md)
+
+*These tools are provided for educational and personal research purposes only. Please handle sensitive data accordingly.*
