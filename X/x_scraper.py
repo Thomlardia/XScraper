@@ -3,7 +3,7 @@
 import csv
 from playwright.sync_api import sync_playwright
 
-MAX_SCROLLS = 10        # How many times the script will scroll down
+MAX_SCROLLS = 50        # How many times the script will scroll down
 IDLE_LIMIT = 5          # stop after this many scrolls with nothing new
 
 with sync_playwright() as p: # starts playwright and assigns it to the variable p
@@ -31,7 +31,11 @@ with sync_playwright() as p: # starts playwright and assigns it to the variable 
                 when = time_loc.first.get_attribute("datetime") if time_loc.count() else ""
                 link_loc = tweet.locator('a:has(time)')
                 link = "https://x.com" + link_loc.first.get_attribute("href") if link_loc.count() else ""
-                comments[(user, text)] = (user, when, text, link) # store data
+                likes_loc = tweet.locator('[data-testid="like"], [data-testid="unlike"]')
+                likes = (likes_loc.first.inner_text() if likes_loc.count() else "") or "0"
+                replies_loc = tweet.locator('[data-testid="reply"]')
+                replies = (replies_loc.first.inner_text() if replies_loc.count() else "") or "0"
+                comments[(user, text)] = (user, when, text, link, likes, replies) # store data
             except Exception: # if the sequence fails, move on to next tweet instead of erroring
                 pass
 
@@ -47,7 +51,7 @@ with sync_playwright() as p: # starts playwright and assigns it to the variable 
     # save data to csv
     with open("x_comments.csv", "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
-        writer.writerow(["user", "datetime", "text", "link"])
+        writer.writerow(["user", "datetime", "text", "link", "likes", "replies"])
         writer.writerows(comments.values())
 
     print(f"Saved {len(comments)} items to comments.csv")

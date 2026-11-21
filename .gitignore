@@ -12,4 +12,5 @@ __pycache__/
 venv/
 .env
 
-threads
+threads/
+tweets/
