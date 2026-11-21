@@ -2,6 +2,7 @@
 Code repository for scraping data from X and Reddit. 
 
 ## Tools / Requirements
+| tool | description |
 |---|---|
 | **Python 3** | Language the script is written in |
 | **Playwright** | Library that controls the browser and reads the page (for X) |
